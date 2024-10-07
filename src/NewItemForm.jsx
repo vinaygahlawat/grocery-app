@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import API_ENDPOINTS from "./config/api";
 
-export default function NewItemForm({ items, setUpdate }) {
+export default function NewItemForm({ setUpdate }) {
   const [item, setItem] = useState("");
   async function handleSubmit(e) {
     try {

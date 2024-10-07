@@ -22,7 +22,7 @@ export default function App() {
     <div className="App">
       <h1>My Grocery App</h1>
       <GroceryItemList items={items} setUpdate={setUpdate} />
-      <NewItemForm items={items} setUpdate={setUpdate} />
+      <NewItemForm setUpdate={setUpdate} />
     </div>
   );
 }
