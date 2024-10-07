@@ -25,10 +25,48 @@ export default function GroceryItem({ name, have, setUpdate }) {
     }
   }
 
+  async function handleClick(name, have) {
+    const payload = {
+      name: name,
+      have: have,
+    };
+    payload.have = !have;
+    try {
+      const response = await axios.put(
+        API_ENDPOINTS.ITEMS,
+        { data: payload },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json;charset=UTF-8",
+          },
+        }
+      );
+      console.log(`Update response: ${JSON.stringify(response)}`);
+      setUpdate((prev) => !prev);
+    } catch (error) {
+      console.log(`Error when trying to click ${name}. `, error);
+    }
+  }
+
+  const styleStrikeThrough = {
+    color: "grey",
+    textDecoration: "line-through",
+  };
+
+  const styleNormal = {
+    color: "black",
+  };
+
   return (
     <div className="GroceryItem">
       <div>
-        GroceryItem: {name} {!have ? "" : " --> (Out of stock)"}
+        <span
+          style={have ? styleStrikeThrough : styleNormal}
+          onClick={() => handleClick(name, have)}
+        >
+          GroceryItem: {name}
+        </span>
         <span>
           <button onClick={() => handleDelete(name)}>🗑️</button>
         </span>
